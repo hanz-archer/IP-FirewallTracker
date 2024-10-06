@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>IP Tracker</title>
+    <style>
+        #map {
+            height: 400px; /* Adjust height as needed */
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full text-center">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">IP Address Logged</h1>
+        
+        <div class="mb-2">
+            <p class="text-gray-600">Your IP Address:</p>
+            <p class="text-lg text-gray-800 font-medium">{{ ip_log.ip_address }}</p>
+        </div>
+        
+        <div class="mb-2">
+            <p class="text-gray-600">Logged at:</p>
+            <p class="text-lg text-gray-800 font-medium">{{ ip_log.timestamp }}</p>
+        </div>
+        
+        <div class="mb-2">
+            <p class="text-gray-600">Location:</p>
+            <p class="text-lg text-gray-800 font-medium">{{ ip_log.location }}</p> <!-- If using geolocation -->
+        </div>
+
+        <div class="mb-2">
+            <p class="text-gray-600">Firewall Status:</p>
+            <p class="text-lg text-gray-800 font-medium">{{ firewall_status }}</p> <!-- Display firewall status -->
+        </div>
+        
+        <button class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300">
+            Refresh IP
+        </button>
+    </div>
+
+</body>
+</html>
