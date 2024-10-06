@@ -6,41 +6,134 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>IP Tracker</title>
     <style>
+        body {
+            background-color: #000; /* Black background */
+            color: #00ff00; /* Green text */
+            font-family: 'Courier New', Courier, monospace; /* Monospace font for hacker style */
+        }
         #map {
             height: 400px; /* Adjust height as needed */
             width: 100%;
         }
+        /* Loader Styles */
+        .loader {
+            display: none; /* Hidden by default */
+            border: 8px solid #00ff00; /* Green */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50; /* Ensures the loader is above other content */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Card Styles */
+        .card {
+            background-color: #1a1a1a; /* Dark card background */
+            border: 1px solid #00ff00; /* Green border */
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            margin: 20px;
+        }
+        /* Button Styles */
+        .btn-scan {
+            background-color: #00ff00; /* Green background */
+            color: black; /* Black text */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .btn-scan:hover {
+            background-color: #00cc00; /* Darker green on hover */
+        }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="flex items-center justify-center min-h-screen relative">
 
-    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full text-center">
-        <h1 class="text-2xl font-bold text-gray-800 mb-4">IP Address Logged</h1>
+    <div class="loader" id="loader"></div> <!-- Loader Element -->
+
+    <div class="card" id="content">
+        <h1 class="text-2xl font-bold mb-4">IP Address Logged</h1>
         
         <div class="mb-2">
-            <p class="text-gray-600">Your IP Address:</p>
-            <p class="text-lg text-gray-800 font-medium">{{ ip_log.ip_address }}</p>
+            <p>Your IP Address:</p>
+            <p class="text-lg font-medium">{{ ip_log.ip_address }}</p>
         </div>
         
         <div class="mb-2">
-            <p class="text-gray-600">Logged at:</p>
-            <p class="text-lg text-gray-800 font-medium">{{ ip_log.timestamp }}</p>
+            <p>Logged at:</p>
+            <p class="text-lg font-medium">{{ ip_log.timestamp }}</p>
         </div>
         
         <div class="mb-2">
-            <p class="text-gray-600">Location:</p>
-            <p class="text-lg text-gray-800 font-medium">{{ ip_log.location }}</p> <!-- If using geolocation -->
+            <p>Location:</p>
+            <p class="text-lg font-medium">{{ ip_log.location }}</p> <!-- If using geolocation -->
         </div>
 
         <div class="mb-2">
-            <p class="text-gray-600">Firewall Status:</p>
-            <p class="text-lg text-gray-800 font-medium">{{ firewall_status }}</p> <!-- Display firewall status -->
+            <p>Firewall Status:</p>
+            <p class="text-lg font-medium {% if firewall_status == 'Disabled' %}text-red-600{% else %}text-green-600{% endif %}">
+                {{ firewall_status }}
+            </p>
+            {% if firewall_status == 'Disabled' %}
+                <p class="text-red-500 mt-1">⚠️ Warning: Your firewall is turned off!</p>
+            {% endif %}
         </div>
         
-        <button class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300">
-            Refresh IP
+        <div class="mb-2">
+            <p>Windows Security Status:</p>
+            <p class="text-lg font-medium {% if windows_security_status == 'Disabled' %}text-red-600{% else %}text-green-600{% endif %}">
+                {{ windows_security_status }}
+            </p>
+            {% if windows_security_status == 'Disabled' %}
+                <p class="text-red-500 mt-1">⚠️ Warning: Windows Security is turned off!</p>
+            {% endif %}
+        </div>
+
+        <div class="mb-2">
+            <p>Malicious Files Found:</p>
+            <p class="text-lg font-medium">{{ malicious_files_count }}</p>
+        </div>
+
+        <button class="btn-scan mt-4" onclick="scanForMaliciousFiles()">
+            Scan for Malicious Files
         </button>
     </div>
 
+    <script>
+        function scanForMaliciousFiles() {
+            // Show loader
+            document.getElementById('loader').style.display = 'block';
+            // Hide content while loading
+            document.getElementById('content').style.display = 'none';
+
+            // Simulate scanning process (you should replace this with your actual scan logic)
+            setTimeout(function() {
+                // Simulate the result of the scanning process
+                let maliciousFilesFound = 3; // This would be dynamically fetched
+                
+                // Update the malicious files count (in practice, update this from your backend)
+                document.querySelector('p.text-lg.font-medium').textContent = maliciousFilesFound;
+                
+                // Hide the loader and show content again
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }, 2000); // Adjust the timeout to match your scanning logic
+        }
+    </script>
 </body>
 </html>
