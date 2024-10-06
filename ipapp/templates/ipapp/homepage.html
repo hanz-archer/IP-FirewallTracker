@@ -7,19 +7,19 @@
     <title>IP Tracker</title>
     <style>
         body {
-            background-color: #000; /* Black background */
-            color: #00ff00; /* Green text */
-            font-family: 'Courier New', Courier, monospace; /* Monospace font for hacker style */
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
         }
         #map {
-            height: 400px; /* Adjust height as needed */
+            height: 400px;
             width: 100%;
         }
-        /* Loader Styles */
+
         .loader {
-            display: none; /* Hidden by default */
-            border: 8px solid #00ff00; /* Green */
-            border-top: 8px solid #3498db; /* Blue */
+            display: none;
+            border: 8px solid #00ff00; 
+            border-top: 8px solid #3498db; 
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -28,7 +28,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 50; /* Ensures the loader is above other content */
+            z-index: 50; 
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -36,8 +36,8 @@
         }
         /* Card Styles */
         .card {
-            background-color: #1a1a1a; /* Dark card background */
-            border: 1px solid #00ff00; /* Green border */
+            background-color: #1a1a1a;
+            border: 1px solid #00ff00;
             border-radius: 8px;
             padding: 20px;
             max-width: 400px;
@@ -48,8 +48,8 @@
         }
         /* Button Styles */
         .btn-scan {
-            background-color: #00ff00; /* Green background */
-            color: black; /* Black text */
+            background-color: #00ff00;
+            color: black;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -58,14 +58,13 @@
             font-weight: bold;
         }
         .btn-scan:hover {
-            background-color: #00cc00; /* Darker green on hover */
+            background-color: #00cc00;
         }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen relative">
 
-    <div class="loader" id="loader"></div> <!-- Loader Element -->
-
+    <div class="loader" id="loader"></div>
     <div class="card" id="content">
         <h1 class="text-2xl font-bold mb-4">IP Address Logged</h1>
         
